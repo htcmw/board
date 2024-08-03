@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
+import 'add_post_page.dart';
 import 'post_item.dart';
 
-class BulletinBoardPage extends StatelessWidget {
+class BulletinBoardPage extends StatefulWidget {
+  @override
+  _BulletinBoardPageState createState() => _BulletinBoardPageState();
+}
+
+class _BulletinBoardPageState extends State<BulletinBoardPage> {
   final List<Map<String, String>> posts = [
     {
       'title': '첫 번째 게시글',
@@ -23,6 +29,12 @@ class BulletinBoardPage extends StatelessWidget {
       'date': '2024-07-19'
     },
   ];
+
+  void _addPost(Map<String, String> newPost) {
+    setState(() {
+      posts.add(newPost);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +57,16 @@ class BulletinBoardPage extends StatelessWidget {
             );
           },
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => AddPostPage(onAddPost: _addPost),
+            ),
+          );
+        },
+        child: Icon(Icons.add),
       ),
     );
   }

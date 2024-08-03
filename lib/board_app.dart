@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'layout.dart';
+import 'list_post_page.dart';
 
 class BoardApp extends StatelessWidget {
   const BoardApp({super.key});
