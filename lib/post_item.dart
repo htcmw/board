@@ -5,6 +5,8 @@ class PostItem extends StatelessWidget {
   final String author;
   final String date;
   final String content;
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
 
   const PostItem({
     super.key,
@@ -12,6 +14,8 @@ class PostItem extends StatelessWidget {
     required this.author,
     required this.date,
     required this.content,
+    required this.onEdit,
+    required this.onDelete,
   });
 
   @override
@@ -27,12 +31,29 @@ class PostItem extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.edit),
+                      onPressed: onEdit,
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.delete),
+                      onPressed: onDelete,
+                    ),
+                  ],
+                ),
+              ],
             ),
             const SizedBox(height: 8.0),
             Row(

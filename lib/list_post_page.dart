@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-
-import 'add_post_page.dart';
 import 'post_item.dart';
+import 'add_post_page.dart';
+import 'edit_post_page.dart';
 
 class BulletinBoardPage extends StatefulWidget {
   @override
@@ -36,6 +36,18 @@ class _BulletinBoardPageState extends State<BulletinBoardPage> {
     });
   }
 
+  void _editPost(int index, Map<String, String> updatedPost) {
+    setState(() {
+      posts[index] = updatedPost;
+    });
+  }
+
+  void _deletePost(int index) {
+    setState(() {
+      posts.removeAt(index);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +66,20 @@ class _BulletinBoardPageState extends State<BulletinBoardPage> {
               author: post['author']!,
               date: post['date']!,
               content: post['content']!,
+              onEdit: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => EditPostPage(
+                      post: post,
+                      index: index,
+                      onEditPost: _editPost,
+                    ),
+                  ),
+                );
+              },
+              onDelete: () {
+                _deletePost(index);
+              },
             );
           },
         ),
